@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный дом Германа Никиты</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: white;
+        }
+        .emoji-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 40px;
+            margin: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            background: #222;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .tab {
+            padding: 12px 25px;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .tab:hover { background: #ffcc00; }
+        .content { display: none; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        .active { display: block; }
+        .window { cursor: pointer; transition: fill 0.3s ease; }
+    </style>
+</head>
+<body>
+    <div class="emoji-container">
+        😊 ❤️ 🔥 🌟 🚀
+    </div>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab" onclick="showTab('home')">🏠 Главная</div>
+            <div class="tab" onclick="showTab('lighting')">💡 Освещение</div>
+            <div class="tab" onclick="showTab('climate')">🌡️ Климат</div>
+            <div class="tab" onclick="showTab('security')">🔒 Безопасность</div>
+            <div class="tab" onclick="showTab('settings')">⚙️ Настройки</div>
+        </div>
+        <div id="home" class="content active"><h2>🏠 Главная</h2><p>Общее состояние системы.</p></div>
+        <div id="lighting" class="content">
+            <h2>💡 Освещение</h2>
+            <svg viewBox="0 0 200 200" width="300" height="300">
+                <rect x="20" y="50" width="160" height="120" fill="brown" />
+                <polygon points="20,50 100,10 180,50" fill="darkred" />
+                <rect id="window1" class="window" x="40" y="70" width="40" height="40" fill="gray" onclick="toggleLight('window1')" />
+                <rect id="window2" class="window" x="120" y="70" width="40" height="40" fill="gray" onclick="toggleLight('window2')" />
+            </svg>
+        </div>
+    </div>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+        function toggleLight(windowId) {
+            const el = document.getElementById(windowId);
+            const state = el.getAttribute('fill') === 'yellow' ? 'off' : 'on';
+            el.setAttribute('fill', state === 'on' ? 'yellow' : 'gray');
+        }
+    </script>
+</body>
+</html>
